@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>Codificação da Informação - 2008/2009 - Trabalhos práticos </title>
+</head>
+<body>
+
+<table bgcolor="#BBBBBB" width="100%">
+<tr>
+<td>
+<font size="+3"><b>Codificação da Informação</b></font>
+<br><br>
+<font size="+2"><i>Aula prática de 14 de Outubro de 2016</i></font>
+</td>
+</tr>
+</table>
+
+<h3>Objectivos</h3>
+
+<p>
+O objectivo desta aula prática é ilustrar a parte
+da matéria teórica relacionada com a compressão por dicionário.
+</p> 
+
+<h3>Parte 1: LZRW1-A</h3>
+
+<p>
+Ross Williams publicou na <a
+href="http://www.ross.net/compression/lzrw1.html">Internet</a> o seu
+algoritmo de compressão LZRW1, que é baseado no LZ77. A distribuição
+contém os seguintes ficheiros:
+</p>
+
+<ul>
+
+<li><a href="./lzrw1-a/port.h">port.h</a>: Definições de tipos de dados.</li>
+<li><a href="./lzrw1-a/fast_copy.h">fast_copy.h</a>: Cópia rápida de dados, pode ser
+optimizada para um dado CPU.</li>
+<li><a href="./lzrw1-a/lzrw1-a.c">lzrw1-a.c</a>: código da função <em>compress</em>: Esta
+função tem o seguinte cabeçalho:
+<pre>
+compress( UWORD action, UBYTE *wrk_mem, UBYTE *src_adr,
+   ULONG src_len, UBYTE *dst_adr, ULONG *p_dst_len)
+</pre>
+Esta função faz três coisas diferentes de acordo com o parâmetro
+ACTION: comprime, descomprime e dá informação sobre os parâmetros do
+compressor.
+<ul>
+ <li> action: COMPRESS_ACTION_IDENTITY, COMPRESS_ACTION_COMPRESS, COMPRESS_ACTION_DECOMPRESS
+ <li> wrk_mem: endereço de um buffer de trabalho 
+ <li> src_adr: endereço do buffer onde estão os bytes a comprimir ou descomprimir
+ <li> src_len: comprimento do byffer src_adr
+ <li> dst_adr: buffer para onde é feita a descompressão/compressão
+ <li> p_dst_len: parâmetro de saída - indica o num. de bytes produzidos pelo processo de compressão ou decompressão
+</ul>
+Para mais detalhes, ver o ficheiro <em>compress.h</em>.</li>
+<li><a href="./lzrw1-a/compress.h">compress.h</a>: Definições de constantes,
+tipos de dados, e cabeçalhos da função <em>compress</em>. Deve ser
+incluído sempre que a função <em>compress</em>
+é usada.</li>
+</ul>
+
+<p>
+Considere os programas <a
+href="./lzrw1-a/compr-incompleto.c">compr-incompleto.c</a> e <a
+href="./lzrw1-a/decompr-incompleto.c">decompr-incompleto.c</a> que
+utilizam a função <em>compress()</em>. Complete estes programas. Pode
+usar este <a href="./lzrw1-a/Makefile">Makefile</a> (não se esqueça de
+mudar o nome dos ficheiros para compr.c e decompr.c respectivamente).
+</p>
+
+<h3>Parte 2: LZW</h3>
+
+<p>
+Esta parte do trabalho tem a ver o método LZW (Lempel-Ziv-Welch) para
+comprimir ficheiros. Esse método está descrito 
+
+<a href="http://marknelson.us/1989/10/01/lzw-data-compression/" >neste artigo</a> 
+que foi publicado no <em> Dr. Dobb's Journal
+October, 1989 </em>.  Recorde que o algoritmo LZW é baseado no
+algoritmo LZ78.
+</p>
+
+<p>
+O programa é invocado, indicando na linha de comando o ficheiro <em>f
+</em> a comprimir. O comportamento normal é que o programa produz um
+ficheiro chamado <em> test.lzw </em> com a compressão de <em>f </em> e
+um chamado <em> test.out </em> resultante da descompressão de <em>
+test.lzw </em>.
+</p>
+
+<p>
+O código C correspondente está no ficheiro <a
+href="./lzw-incompleto.c" > lzw-incompleto.c</a>. Pretende-se que o
+complete.
+</p>
+<h3>Parte 3</h3>
+
+<p>
+O ficheiro <a href="./calgary.zip">calgary.zip</a> contém o teste de
+compressão chamado "Calgary corpus". Este teste contém ficheiros de
+vários tipos e é uma espécie de "benchmark" dos programas de
+compressão.
+</p>
+
+<p>
+Comprima cada um dos ficheiros do "Calgary corpus", usando os
+seguintes programas:
+</p>
+
+<ul>
+<li> lzw
+<li> lzrw1-a
+<li> gzip
+<li> bzip2
+</ul>
+
+<p>
+Para cada ficheiro e para cada um dos programas de compressão, anote a
+taxa de compressão conseguida e o tempo de execução do programa
+compressor.
+</p>
+
+</body>
+</html>
+
