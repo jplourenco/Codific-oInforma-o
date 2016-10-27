@@ -11,7 +11,7 @@
 int main( int argc, char *argv[] ){
 
 	int fr, fw, n;
-        struct stat st;
+        struct stat st;	
 	unsigned char *src, *dst;
 	compress_identity *id;
 	long len, out_len;
@@ -83,7 +83,7 @@ int main( int argc, char *argv[] ){
 	fw = open(ofile, O_WRONLY | O_CREAT | O_TRUNC , 0660);
 	if( fw < 0 ) {
 		printf("ficheiro %s nao pode ser escrito\n", 
-                       argv[1]);
+                       ofile);
 		exit(1);
 	}
 			
