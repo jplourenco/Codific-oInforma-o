@@ -7,5 +7,5 @@ echo $LIST
 
 for each in $LIST/*;  
 do
-    eval "./lzrw1 $each"
+    eval "./lzw $each"
 done 
