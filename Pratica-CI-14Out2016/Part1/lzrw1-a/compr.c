@@ -66,9 +66,9 @@ int main( int argc, char *argv[] ){
 	}
 
 	/* completar */
-	compress( COMPRESS_ACTION_COMPRESS, warea, src, len, dst, out_len);
+	compress( COMPRESS_ACTION_COMPRESS, warea, src, len, dst, &out_len);
 
-	printf("length of compressed file = %d\n", out_len);
+	printf("length of compressed file = %ld\n", out_len);
 
 	fw = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC , 0660);
 	if( fw < 0 ) {

@@ -11,18 +11,19 @@
 int main( int argc, char *argv[] ){
 
 	int fr, fw, n;
-        struct stat st;
+        struct stat st;	
 	unsigned char *src, *dst;
 	compress_identity *id;
 	long len, out_len;
 	unsigned char *warea;
 	char message[128];
 		
-        if( argc != 3){
-		sprintf(message, "%s file1 file2\n", argv[0]);
+        if( argc != 2){
+		sprintf(message, "%s file1\n", argv[0]);
 		perror(message);
 		exit(1);
 	}
+
 
 	fr = open(argv[1], O_RDONLY);
 	if( fr < 0 ) {
@@ -30,6 +31,14 @@ int main( int argc, char *argv[] ){
 			"ficheiro %s nao pode ser aberto para leitura\n", 
                         argv[1]);
 		perror(message);
+		exit(1);
+	}
+
+	char * ofile;
+	
+	if ( (ofile = malloc(strlen(argv[1])+strlen(".lzwr1")+1))!=NULL ) {
+		sprintf(ofile,"%s.lzwr1",argv[1]);
+	} else {
 		exit(1);
 	}
 
@@ -66,14 +75,15 @@ int main( int argc, char *argv[] ){
 	}
 
 	/* completar */
-	compress( COMPRESS_ACTION_COMPRESS, warea, src, len, dst, out_len);
+	compress( COMPRESS_ACTION_COMPRESS, warea, src, len, dst, &out_len);
 
-	printf("length of compressed file = %d\n", out_len);
+	printf("length of compressed file = %ld\n", out_len);
 
-	fw = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC , 0660);
+
+	fw = open(ofile, O_WRONLY | O_CREAT | O_TRUNC , 0660);
 	if( fw < 0 ) {
 		printf("ficheiro %s nao pode ser escrito\n", 
-                       argv[2]);
+                       ofile);
 		exit(1);
 	}
 			

@@ -1,8 +1,8 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include <sys/stat.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "port.h"
@@ -17,9 +17,9 @@ int main( int argc, char *argv[] ){
 	long len, out_len;
 	unsigned char *warea;
 	char message[128];
-		
+
         if( argc != 3){
-		sprintf(message, "%s file1 file2\n", argv[0]);
+		sprintf(message,"%s file1 file2\n", argv[0]);
 		perror(message);
 		exit(1);
 	}
@@ -29,7 +29,7 @@ int main( int argc, char *argv[] ){
 		sprintf(message, 
 			"ficheiro %s nao pode ser aberto para leitura\n", 
                         argv[1]);
-		perror(message);
+		 perror(message);
 		exit(1);
 	}
 
@@ -51,11 +51,10 @@ int main( int argc, char *argv[] ){
 	close(fr);
 
 			
-        if ( (dst = (unsigned char *)malloc( st.st_size + COMPRESS_OVERRUN ))  == NULL) {
+        if ( (dst = (unsigned char *)malloc( 9 * st.st_size ))  == NULL) {
 		perror("falha no malloc\n");
 		exit(1);
 	}
-	
 	compress( COMPRESS_ACTION_IDENTITY, 
 			NULL, NULL, 0, NULL, (ULONG *)&id); 
         len = id->memory;
@@ -65,10 +64,10 @@ int main( int argc, char *argv[] ){
 		exit(1);
 	}
 
-	/* completar */
-	compress( COMPRESS_ACTION_COMPRESS, warea, src, len, dst, out_len);
+	/* a completar */ 
+	compress( COMPRESS_ACTION_DECOMPRESS,  warea, src, len, dst, &out_len);
 
-	printf("length of compressed file = %d\n", out_len);
+	printf("length of decompressed file = %ld\n", out_len);
 
 	fw = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC , 0660);
 	if( fw < 0 ) {
