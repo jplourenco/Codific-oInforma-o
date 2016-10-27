@@ -1,7 +1,9 @@
 # Codificao Informacao
 
-## Part 1 - LZRW1-A
+## Prática - 14 de Outubro
 
-## Part 2 - LZW
+### Part 1 - LZRW1-A
 
-## Part 3 - Calgary Corpus
+### Part 2 - LZW
+
+### Part 3 - Calgary Corpus
